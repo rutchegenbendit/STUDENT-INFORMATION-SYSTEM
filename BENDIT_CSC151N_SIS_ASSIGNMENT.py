@@ -5,7 +5,7 @@ import tkinter.messagebox
 import tkinter.ttk as ttk
 import csv
 import os
-from turtle import bgcolor, bgpic
+from turtle import bgcolor
 
 
 class Student:
@@ -18,7 +18,7 @@ class Student:
     
         self.data = dict()
         self.temp = dict()
-        self.filename = "Studentdata.csv"
+        self.filename = "Studentinfo.csv"
         
         Student_First_Name = StringVar()
         Student_Middle_Initial = StringVar()
@@ -29,14 +29,14 @@ class Student:
         Student_Course = StringVar()
         searchbar = StringVar()
         
-        if not os.path.exists('Studentdata.csv'):
-            with open('Studentdata.csv', mode='w') as csv_file:
+        if not os.path.exists('Studentinfo.csv'):
+            with open('Studentinfo.csv', mode='w') as csv_file:
                 fieldnames = ["Student ID Number", "Last Name", "First Name", "Middle Initial","Gender", "Year Level", "Course"]
                 writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
                 writer.writeheader()
         
         else:
-            with open('Studentdata.csv', newline='') as csv_file:
+            with open('Studentinfo.csv', newline='') as csv_file:
                 reader = csv.DictReader(csv_file)
                 for row in reader:
                     self.data[row["Student ID Number"]] = {'Last Name': row["Last Name"], 'First Name': row["First Name"], 'Middle Initial': row["Middle Initial"], 'Gender': row["Gender"],'Year Level': row["Year Level"], 'Course': row["Course"]}
@@ -53,7 +53,7 @@ class Student:
                 return
             
         def addStudent():
-            with open('Studentdata.csv', "a", newline="") as file:
+            with open('Studentinfo.csv', "a", newline="") as file:
                 csvfile = csv.writer(file)
                 if Student_IDNumber.get()=="" or Student_First_Name.get()=="" or Student_Middle_Initial.get()=="" or Student_Last_Name.get()=="" or Student_YearLevel.get()=="":
                     tkinter.messagebox.showinfo("SIS","Please fill in student information.")
@@ -78,7 +78,7 @@ class Student:
         
         def displayData():
             tree.delete(*tree.get_children())
-            with open('Studentdata.csv') as file:
+            with open('Studentinfo.csv') as file:
                 reader = csv.DictReader(file)
                 for row in reader:
                     IDNumber=row['Student ID Number']
@@ -135,7 +135,7 @@ class Student:
     
        
         def updateData():
-            with open('Studentdata.csv', "a", newline="") as file:
+            with open('Studentinfo.csv', "a", newline="") as file:
                 csvfile = csv.writer(file)
                 if Student_IDNumber.get()=="" or Student_First_Name.get()=="" or Student_Middle_Initial.get()=="" or Student_Last_Name.get()=="" or Student_YearLevel.get()=="":
                     tkinter.messagebox.showinfo("SIS","Please select student record from the list")
@@ -148,113 +148,116 @@ class Student:
 
         #============================================================FRAMES====================================================#
         
-        MainFrame = Frame(self.root, bd=7, width=80, height=300, relief=GROOVE, bg="DARK GREEN")
+        MainFrame = Frame(self.root, bd=7, width=80, height=300, relief=GROOVE, bg="DARKSLATEGRAY")
         MainFrame.grid()
         
-        BotFrame1 = Frame(MainFrame,  width=1300, height=100, relief=GROOVE,bg="DARK GREEN")
+        BotFrame1 = Frame(MainFrame,  width=1300, height=100, relief=GROOVE,bg="DARKSLATEGRAY")
         BotFrame1.grid(row=4, column=0)
 
-        BotFrame1 = Frame(MainFrame,  width=1300, height=200, relief=GROOVE,bg="DARK GREEN")
+        BotFrame1 = Frame(MainFrame,  width=1300, height=200, relief=GROOVE,bg="DARKSLATEGRAY")
         BotFrame1.grid(row=2, column=0)
         
-        TitleFrame = Frame(MainFrame, bg="black",bd=5, width=400, height=100, relief=GROOVE)
+        TitleFrame = Frame(MainFrame, bg="LIGHTSLATEGRAY",bd=5, width=400, height=400, relief=GROOVE)
         TitleFrame.grid(row=0, column=0)
         
-        TopFrame2 = Frame(MainFrame, bd=0,bg="BLACK", width=500, height=450, relief=FLAT)
-        TopFrame2.grid(row=1, column=0)
+        TopFrame2 = Frame(MainFrame, bd=5,bg="LIGHTSLATEGRAY", width=500, height=450, relief=FLAT)
+        TopFrame2.grid(row=3, column=0)
         
-        SearchFrame = Frame(MainFrame, width = 1340, height = 100, relief = GROOVE)
-        SearchFrame.grid(row =3, column =0)
-        
-        LeftFrame = Frame(TopFrame2, bd=0, width=1200, height=400, padx=2, bg="BLACK", relief=FLAT)
+      
+        LeftFrame = Frame(TopFrame2, bd=0, width=1200, height=400, padx=2, bg="LIGHTSLATEGRAY", relief=RAISED)
         LeftFrame.pack(side=LEFT)
         
-        LeftFrame1 = Frame(LeftFrame, bd=0,bg="DARK GREEN", width=200, height=300, padx=2, pady=4, relief=FLAT)
+        LeftFrame1 = Frame(LeftFrame, bd=0,bg="DARKSLATEGRAY", width=200, height=300, padx=2, pady=4, relief=FLAT)
         LeftFrame1.pack(side=TOP, padx=0, pady=0)
         
-        RightFrame1 = Frame(TopFrame2, bd=5, width=600, height=500, padx=2, bg="DARK GREEN", relief=GROOVE)
+        RightFrame1 = Frame(TopFrame2, bd=5, width=600, height=500, padx=2, bg="GRAY", relief=GROOVE)
         RightFrame1.pack(side=RIGHT)
 
         
         
         #=============================================TITLE===========================================#
         
-        self.lblTitle = Label(TitleFrame, font=('Quicksand',38,'bold'), text="MSU-IIT STUDENT INFORMATION SYSTEM", bg="DARK GREEN",bd=7)
+        self.lblTitle = Label(TitleFrame, font=('Quicksand',38,'bold'), text="MSU-IIT STUDENT INFORMATION SYSTEM", bg="LIGHTSLATEGRAY",bd=7)
         self.lblTitle.grid(row=0, column=0, padx=190)
         
         #===========================================================================LABELS & ENTRy WIDGETS=======================================================#
         
-        
-        self.lblStudentID = Label(LeftFrame1, font=('Quicksand',12,'bold'), text="STUDENT ID:",bg="DARK GREEN", bd=5 , anchor=NW)
+        self.lblStudentID = Label(LeftFrame1, font=('Quicksand',12,'bold'), text="STUDENT ID:",bg="DARKSLATEGRAY",fg="white", bd=5 , anchor=NW)
         self.lblStudentID.grid(row=0, column=0, sticky=W, padx=3)
         self.txtStudentID = Entry(LeftFrame1, font=('Quicksand',12,'bold'), width=20, justify='left', textvariable = Student_IDNumber)
         self.txtStudentID.grid(row=0, column=1)
+
+        self.lblStudentID = Label(BotFrame1, font=('Quicksand',12,'bold'), text="STUDENT ID:",bg="DARKSLATEGRAY",fg="white", bd=5 , anchor=NW)
+        self.lblStudentID.grid(row=4, column=3, sticky=W, padx=3)
+        self.txtStudentID = Entry(LeftFrame1, font=('Quicksand',12,'bold'), width=20, justify='left', textvariable = Student_IDNumber)
+        self.txtStudentID.grid(row=1, column=1)
         
-        self.lblLastName = Label(LeftFrame1, font=('Quicksand',12,'bold'), text="LAST NAME:",bg="DARK GREEN",bd=7, anchor=NW)
+        
+        self.lblLastName = Label(LeftFrame1, font=('Quicksand',12,'bold'), text="LAST NAME:",bg="DARKSLATEGRAY",fg="white",bd=7, anchor=NW)
         self.lblLastName.grid(row=1, column=0, sticky=NW, padx=3)
         self.txtLastName = Entry(LeftFrame1, font=('Quicksand',12,'bold'), width=20, justify='left', textvariable = Student_Last_Name)
         self.txtLastName.grid(row=1, column=1)
         
-        self.lblFirstName = Label(LeftFrame1, font=('Quicksand',12,'bold'), text="FIRST NAME:",bg="DARK GREEN", bd=7, anchor=NW)
+        self.lblFirstName = Label(LeftFrame1, font=('Quicksand',12,'bold'), text="FIRST NAME:",bg="DARKSLATEGRAY",fg="white", bd=7, anchor=NW)
         self.lblFirstName.grid(row=2, column=0, sticky=NW, padx=3)
         self.txtFirstName = Entry(LeftFrame1, font=('Quicksand',12,'bold'), width=20, justify='left', textvariable = Student_First_Name)
         self.txtFirstName.grid(row=2, column=1)
         
-        self.lblMiddleInitial = Label(LeftFrame1, font=('Quicksand',12,'bold'), text="MIDDLE INITIAL:", bg="DARK GREEN",bd=7, anchor=NW)
+        self.lblMiddleInitial = Label(LeftFrame1, font=('Quicksand',12,'bold'), text="MIDDLE INITIAL:", bg="DARKSLATEGRAY",fg="white",bd=7, anchor=NW)
         self.lblMiddleInitial.grid(row=3, column=0, sticky=NW, padx=3)
         self.txtMiddleInitial = Entry(LeftFrame1, font=('Quicksand',12,'bold'), width=20, justify='left', textvariable = Student_Middle_Initial)
         self.txtMiddleInitial.grid(row=3, column=1)
         
-        self.lblCourse = Label(LeftFrame1, font=('Quicksand',12,'bold'), text="COURSE:",bg="DARK GREEN", bd=7, anchor=NW)
+        self.lblCourse = Label(LeftFrame1, font=('Quicksand',12,'bold'), text="COURSE:",bg="DARKSLATEGRAY",fg="white", bd=7, anchor=NW)
         self.lblCourse.grid(row=4, column=0, sticky=NW, padx=3)
         self.txtCourse = Entry(LeftFrame1, font=('Quicksand',12,'bold'), width=20, justify='left', textvariable = Student_Course)
         self.txtCourse.grid(row=4, column=1)
         
-        self.lblGender = Label(LeftFrame1, font=('Quicksand',12,'bold'), text="GENDER:", bg="DARK GREEN",bd=7, anchor=NW)
+        self.lblGender = Label(LeftFrame1, font=('Quicksand',12,'bold'), text="GENDER:", bg="DARKSLATEGRAY",fg="white",bd=7, anchor=NW)
         self.lblGender.grid(row=5, column=0, sticky=NW, padx=3)
         
-        self.cboGender = ttk.Combobox(LeftFrame1, font=('Quicksand',12,'bold'), state='readonly', width=20, textvariable = Student_Gender)
+        self.cboGender = ttk.Combobox(LeftFrame1, font=('Quicksand',12,'bold'), state='readonly', width=18, textvariable = Student_Gender)
         self.cboGender['values'] = ('Female', 'Male')
         self.cboGender.grid(row=5, column=1)
         
-        self.lblYearLevel = Label(LeftFrame1, font=('Quicksand',12,'bold'), text="YEAR LEVEL:", bg="DARK GREEN",bd=7, anchor=NW)
+        self.lblYearLevel = Label(LeftFrame1, font=('Quicksand',12,'bold'), text="YEAR LEVEL:", bg="DARKSLATEGRAY",fg="white",bd=7, anchor=NW)
         self.lblYearLevel.grid(row=6, column=0, sticky=NW, padx=3)
         
-        self.cboYearLevel = ttk.Combobox(LeftFrame1, font=('Quicksand',12,'bold'), state='readonly', width=20, textvariable = Student_YearLevel)
+        self.cboYearLevel = ttk.Combobox(LeftFrame1, font=('Quicksand',12,'bold'), state='readonly', width=18, textvariable = Student_YearLevel)
         self.cboYearLevel['values'] = ('1', '2', '3', '4')
         self.cboYearLevel.grid(row=6, column=1)
         
         self.searchbar = Entry(self.root, font=('Quicksand',15,'bold'), textvariable = searchbar, width = 15 )
-        self.searchbar.place(x=220,y=100)
+        self.searchbar.place(x=790,y=95)
         
         
         
         #=========================================================BUTTONS================================================#
         
         self.btnAddNew=Button(self.root, pady=1,bd=4,font=('arial',16,'bold'), padx=10, width=9, height=1,fg="GRAY",bg="BLACK", text='ADD', command=addStudent)
-        self.btnAddNew.place(x=20,y=120)
+        self.btnAddNew.place(x=20,y=128)
         
         self.btnClear=Button(self.root, pady=1,bd=4,font=('arial',16,'bold'), padx=4, width=10, height=1,fg="GRAY",bg="BLACK", text='CLEAR', command=Clear)
-        self.btnClear.place(x=20,y=174)
+        self.btnClear.place(x=20,y=188)
         
         self.btnUpdate=Button(self.root, pady=1,bd=4,font=('arial',16,'bold'), padx=4, width=10, height=1,fg="GRAY",bg="BLACK", text='UPDATE', command=updateData)
-        self.btnUpdate.place(x=20,y=228)
+        self.btnUpdate.place(x=20,y=248)
 
         self.btnEdit=Button(self.root, pady=1,bd=4,font=('arial',16,'bold'), padx=4, width=10, height=1,fg="GRAY",bg="BLACK", text='EDIT', command = editData)
-        self.btnEdit.place(x=20,y=336)
+        self.btnEdit.place(x=20,y=368)
 
         self.btnDisplay=Button(self.root, pady=1,bd=4, font=('arial', 16, 'bold'),padx=4,width=10,height=1, fg="GRAY",bg="BLACK",text="DISPLAY" , command=displayData)
-        self.btnDisplay.place(x=20,y=390)
+        self.btnDisplay.place(x=20,y=425)
 
 
         self.btnDelete=Button(self.root, pady=1,bd=4,font=('arial',16,'bold'), padx=4, width=10, height=1,fg="GRAY",bg="BLACK", text='DELETE',command = deleteData)
-        self.btnDelete.place(x=20,y=282)
+        self.btnDelete.place(x=20,y=308)
 
-        self.btnExit=Button(self.root, pady=1,bd=4,font=('arial',16,'bold'), padx=3, width=10,height=1,fg="GREEN", text='EXIT',bg="BLACK",command = iExit)
-        self.btnExit.place(x=1100,y=450)
+        self.btnExit=Button(self.root, pady=1,bd=4,font=('arial',16,'bold'), padx=3, width=10,height=1,fg="DARKSLATEGRAY", text='EXIT',bg="BLACK",command = iExit)
+        self.btnExit.place(x=1100,y=500)
 
-        self.btnSearch=Button(self.root, pady=1,bd=4,font=('arial',11,'bold'), padx=2, width=20, text='SEARCH ID NUMBER',bg="GRAY", command = searchData)
-        self.btnSearch.place(x=380,y=95)
+        self.btnSearch=Button(self.root, pady=1,bd=2,font=('arial',11,'bold'), padx=2, width=13,height=1,text='SEARCH',bg="GRAY", command = searchData)
+        self.btnSearch.place(x=950,y=93)
 
         
         
@@ -292,7 +295,7 @@ class Student:
         #===========================================================================================================================================================#
     def saveData(self):
         temps = []
-        with open('Studentdata.csv', "w", newline ='') as update:
+        with open('Studentinfo.csv', "w", newline ='') as update:
             fieldnames = ["Student ID Number","Last Name","First Name","Middle Initial","Gender","Year Level","Course"]
             writer = csv.DictWriter(update, fieldnames=fieldnames, lineterminator='\n')
             writer.writeheader()
@@ -308,3 +311,13 @@ if __name__ =='__main__':
     root = Tk()
     application = Student(root)
     root.mainloop()
+
+
+
+
+
+
+
+
+
+
