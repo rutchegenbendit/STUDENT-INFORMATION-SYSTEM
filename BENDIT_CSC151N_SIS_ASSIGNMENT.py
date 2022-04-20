@@ -101,10 +101,10 @@ class Student:
             self.data.pop(id_no, None)
             self.saveData()
             tree.delete(tree.focus())
-            tkinter.messagebox.showinfo("Student Information System","Student Record Deleted Successfully")
+            deleteData = tkinter.messagebox.askyesno("Student Information System", "Confirm if you want to delete")
+            if deleteData > 0:
+             tkinter.messagebox.showinfo("Student Information System","Student Record Deleted Successfully")
             
-        
-        
         def searchData():
             if self.searchbar.get() in self.data:
                 vals = list(self.data[self.searchbar.get()].values())
