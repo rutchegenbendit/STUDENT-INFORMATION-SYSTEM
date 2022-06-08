@@ -30,7 +30,7 @@ class sis(tk.Tk):
 #####################################################################################################################################################################################
 
 def iExit():
-            iExit = tkinter.messagebox.askyesno(" MSU-IIT Student Information System","Confirm if you want to exit")
+            iExit = tkinter.messagebox.askyesno(" VIPC Student Information System","Confirm if you want to exit")
             if iExit > 0:
                 root.destroy()
                 return
@@ -40,7 +40,7 @@ class Home(tk.Frame):
         label = tk.Label(self, text="  VINEYARD  INTERNATIONAL \n POLYTECHNIC COLLEGE  \n \n \n STUDENT INFORMATION SYSTEM",borderwidth=8, relief="ridge", font=("Courier", 40), bg=("darkslategray"), fg=("white"))
         label.place(x=0,y=5,width=920,height=650)
 
-        label = tk.Label(self, text="MSU_IIT", borderwidth=8, relief="raised", font=("Algerian", 29), bg=("lightslategray"), fg=("lightslategray"))
+        label = tk.Label(self, text="VIPC", borderwidth=8, relief="raised", font=("Algerian", 29), bg=("lightslategray"), fg=("lightslategray"))
         label.place(x=920,y=5,width=562,height=660)
 
     
@@ -65,7 +65,7 @@ class Courses(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        self.controller.title("Student Information System")
+        self.controller.title("VIPC Student Information System")
         
     
         Course_Code = StringVar()
@@ -82,7 +82,7 @@ class Courses(tk.Frame):
             
         def add_course():
             if Course_Code.get() == "" or Course_Name.get() == "" : 
-                tkinter.messagebox.showinfo("SIS", "Fill in the box")
+                tkinter.messagebox.showinfo("VIPC SIS", "Fill in student information")
             else:
                 conn = sqlite3.connect("sis_v2.db")
                 c = conn.cursor()         
@@ -91,7 +91,7 @@ class Courses(tk.Frame):
                 conn.close()
                 Course_Code.set('')
                 Course_Name.set('') 
-                tkinter.messagebox.showinfo("SIS", "Added!")
+                tkinter.messagebox.showinfo("VIPC SIS", "Registered Successfully!")
                 display_course()
               
         def display_course():
@@ -111,7 +111,7 @@ class Courses(tk.Frame):
                 cur.execute("PRAGMA foreign_keys = ON")
                 cur.execute("UPDATE courses SET Course_Code=?, Course_Name=? WHERE Course_Code=?", (Course_Code.get(),Course_Name.get(), self.course_list.set(selected, '#1')))  
                 conn.commit()
-                tkinter.messagebox.showinfo("SIS", "Updated!")
+                tkinter.messagebox.showinfo("VIPC SIS", "Updated Successfully!")
                 display_course()
                 clear()
                 conn.close()
@@ -119,7 +119,7 @@ class Courses(tk.Frame):
         def edit_course():
             x = self.course_list.focus()
             if x == "":
-                tkinter.messagebox.showerror("SIS", "Select a course!")
+                tkinter.messagebox.showerror("VIPC SIS", "Please select a course")
                 return
             values = self.course_list.item(x, "values")
             Course_Code.set(values[0])
@@ -127,7 +127,7 @@ class Courses(tk.Frame):
                     
         def delete_course(): 
             try:
-                messageDelete = tkinter.messagebox.askyesno("SIS", "Delete this record?")
+                messageDelete = tkinter.messagebox.askyesno("VIPC SIS", "Are you sure you want to delete this record?")
                 if messageDelete > 0:   
                     con = sqlite3.connect("sis_v2.db")
                     cur = con.cursor()
@@ -137,7 +137,7 @@ class Courses(tk.Frame):
                     cur.execute("DELETE FROM courses WHERE Course_Code = ?",(id_no,))                   
                     con.commit()
                     self.course_list.delete(x)
-                    tkinter.messagebox.showinfo("SIS", "Deleted!")
+                    tkinter.messagebox.showinfo("VIPC SIS", "Deleted Successfully!")
                     display_course()
                     con.close()                    
             except:
@@ -156,7 +156,7 @@ class Courses(tk.Frame):
             con.close()
 
         def iExit():
-            iExit = tkinter.messagebox.askyesno(" MSU-IIT Student Information System","Confirm if you want to exit")
+            iExit = tkinter.messagebox.askyesno(" VIPC Student Information System","Confirm if you want to exit")
             if iExit > 0:
                 root.destroy()
                 return
@@ -186,10 +186,10 @@ class Courses(tk.Frame):
         
 
         ## side by side border for home page 
-        label = tk.Label(self, text="MSU_IIT", font=("Algerian", 29), bg=("lightslategray"), fg=("lightslategray"))
+        label = tk.Label(self, text="VIPC", font=("Algerian", 29), bg=("lightslategray"), fg=("lightslategray"))
         label.place(x=10,y=60,width=180,height=670)
         
-        label = tk.Label(self, text="MSU_IIT", font=("Algerian", 29), bg=("lightslategray"), fg=("lightslategray"))
+        label = tk.Label(self, text="VIPC", font=("Algerian", 29), bg=("lightslategray"), fg=("lightslategray"))
         label.place(x=1090,y=60,width=180,height=670)
 
        
@@ -281,7 +281,7 @@ class Students(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self,parent)
         self.controller = controller
-        self.controller.title("Student Information System")
+        self.controller.title("VIPC Student Information System")
         
         
       
@@ -291,10 +291,10 @@ class Students(tk.Frame):
         label.place(x=0,y=10,width=1280,height=650)
 
         ## side by side border for home page 
-        label = tk.Label(self, text="MSU_IIT", font=("Algerian", 29), bg=("lightslategray"), fg=("lightslategray"))
+        label = tk.Label(self, text="VPIC", font=("Algerian", 29), bg=("lightslategray"), fg=("lightslategray"))
         label.place(x=10,y=60,width=180,height=670)
         
-        label = tk.Label(self, text="MSU_IIT", font=("Algerian", 29), bg=("lightslategray"), fg=("lightslategray"))
+        label = tk.Label(self, text="VPIC", font=("Algerian", 29), bg=("lightslategray"), fg=("lightslategray"))
         label.place(x=1090,y=60,width=180,height=670)
 
          ##top title frame
@@ -334,7 +334,7 @@ class Students(tk.Frame):
         
         def add_stud():
             if Student_ID.get() == "" or Student_Name.get() == "" or Course_Code.get() == "" or Student_YearLevel.get() == "" or Student_Gender.get() == "": 
-                tkinter.messagebox.showinfo("SIS", "Fill in the box")
+                tkinter.messagebox.showinfo("VIPC SIS", "Fill in student information")
             else:  
                 ID = Student_ID.get()
                 ID_list = []
@@ -355,12 +355,12 @@ class Students(tk.Frame):
                             number = x[1]
                             if year.isdigit()==False or number.isdigit()==False:
                                 try:
-                                    tkinter.messagebox.showerror("SIS", "Invalid ID")
+                                    tkinter.messagebox.showerror("VIPC SIS", "Invalid ID")
                                 except:
                                     pass
                             elif year==" " or number==" ":
                                 try:
-                                    tkinter.messagebox.showerror("SIS", "Invalid ID")
+                                    tkinter.messagebox.showerror("VIPC SIS", "Invalid ID")
                                 except:
                                     pass
                             else:
@@ -371,7 +371,7 @@ class Students(tk.Frame):
                                     c.execute("INSERT INTO students(Student_ID,Student_Name,Course_Code,Student_YearLevel,Student_Gender) VALUES (?,?,?,?,?)",\
                                                           (Student_ID.get(),Student_Name.get(),Course_Code.get(),Student_YearLevel.get(), Student_Gender.get()))                                       
                                                                        
-                                    tkinter.messagebox.showinfo("SIS", "Added!")
+                                    tkinter.messagebox.showinfo("VIPC SIS", "Added Successfully!")
                                     conn.commit() 
                                     clear()
                                     display_stud()
@@ -385,18 +385,18 @@ class Students(tk.Frame):
                                     for row in rows:
                                         ids.append(row[0])
                                     if ID in ids:
-                                       tkinter.messagebox.showerror("SIS", "ID already exists")
+                                       tkinter.messagebox.showerror("VIPC SIS", "ID already exists")
                                     else: 
-                                       tkinter.messagebox.showerror("SIS", "Course Unavailable")
+                                       tkinter.messagebox.showerror("VIPC SIS", "Course Unavailable")
                                    
                     else:
-                        tkinter.messagebox.showerror("SIS", "Invalid ID")
+                        tkinter.messagebox.showerror("VIPC SIS", "Invalid ID")
                 else:
-                    tkinter.messagebox.showerror("SIS", "Invalid ID")
+                    tkinter.messagebox.showerror("VIPC SIS", "Invalid ID")
                  
         def update_stud():
             if Student_ID.get() == "" or Student_Name.get() == "" or Course_Code.get() == "" or Student_YearLevel.get() == "" or Student_Gender.get() == "": 
-                tkinter.messagebox.showinfo("SIS", "Select a student")
+                tkinter.messagebox.showinfo("VIPC SIS", "Select a student")
             else:
                 for selected in self.studentlist.selection():
                     conn = sqlite3.connect("sis_v2.db")
@@ -406,14 +406,14 @@ class Students(tk.Frame):
                           WHERE Student_ID=?", (Student_ID.get(),Student_Name.get(),Course_Code.get(),Student_YearLevel.get(), Student_Gender.get(),\
                               self.studentlist.set(selected, '#1')))
                     conn.commit()
-                    tkinter.messagebox.showinfo("SIS", "Updated!")
+                    tkinter.messagebox.showinfo("VIPC SIS", "Updated Successfully!")
                     display_stud()
                     clear()
                     conn.close()
         
         def delete_stud():   
             try:
-                messageDelete = tkinter.messagebox.askyesno("SIS", "Are you sure you want to permanently remove this?")
+                messageDelete = tkinter.messagebox.askyesno("VIPC SIS", "Are you sure you want to permanently delete this?")
                 if messageDelete > 0:   
                     con = sqlite3.connect("sis_v2.db")
                     cur = con.cursor()
@@ -422,7 +422,7 @@ class Students(tk.Frame):
                     cur.execute("DELETE FROM students WHERE Student_ID = ?",(id_no,))                   
                     con.commit()
                     self.studentlist.delete(x)
-                    tkinter.messagebox.showinfo("SIS", "Deleted!")
+                    tkinter.messagebox.showinfo("VIPC SIS", "Deleted Successfully!")
                     display_stud()
                     clear()
                     con.close()                    
@@ -444,7 +444,7 @@ class Students(tk.Frame):
                         self.studentlist.insert("", tk.END, text=row[0], values=row[0:])
                 con.close()
             except:
-                tkinter.messagebox.showerror("SIS", "Invalid ID")           
+                tkinter.messagebox.showerror("VIPC SIS", "Invalid ID")           
                 
         def display_stud():
             self.studentlist.delete(*self.studentlist.get_children())
@@ -460,7 +460,7 @@ class Students(tk.Frame):
         def edit_stud():
             x = self.studentlist.focus()
             if x == "":
-                tkinter.messagebox.showerror("SIS", "Select a record")
+                tkinter.messagebox.showerror("VIPC SIS", "Select student record")
                 return
             values = self.studentlist.item(x, "values")
             Student_ID.set(values[0])
